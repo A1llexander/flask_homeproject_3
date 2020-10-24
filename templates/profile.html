@@ -20,11 +20,54 @@
 
                 <h4 class="mb-4 mt-5">Записаться на пробный урок</h4>
                 <h6 class="mt-4">Понедельник</h6>
-
                 {% if schedule['mon'].values()|sum > 0 %}
                   {% for time, free in schedule['mon'].items() %}
                     {% if free %}
                        <a href="/booking/{{ teacher.id }}/monday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <p>Нет свободных уроков</p>
+                {% endif %}
+
+                <h6 class="mt-4">Вторник</h6>
+                {% if schedule['tue'].values()|sum > 0 %}
+                  {% for time, free in schedule['tue'].items() %}
+                    {% if free %}
+                       <a href="/booking/{{ teacher.id }}/tuesday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <p>Нет свободных уроков</p>
+                {% endif %}
+
+                <h6 class="mt-4">Среда</h6>
+                {% if schedule['wed'].values()|sum > 0 %}
+                  {% for time, free in schedule['wed'].items() %}
+                    {% if free %}
+                       <a href="/booking/{{ teacher.id }}/wednesday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <p>Нет свободных уроков</p>
+                {% endif %}
+
+                <h6 class="mt-4">Четверг</h6>
+                {% if schedule['thu'].values()|sum > 0 %}
+                  {% for time, free in schedule['thu'].items() %}
+                    {% if free %}
+                       <a href="/booking/{{ teacher.id }}/thursday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <p>Нет свободных уроков</p>
+                {% endif %}
+
+                <h6 class="mt-4">Пятница</h6>
+                {% if schedule['fri'].values()|sum > 0 %}
+                  {% for time, free in schedule['fri'].items() %}
+                    {% if free %}
+                       <a href="/booking/{{ teacher.id }}/friday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
                     {% endif %}
                   {% endfor %}
                 {% else %}
