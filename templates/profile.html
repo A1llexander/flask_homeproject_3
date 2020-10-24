@@ -4,79 +4,38 @@
     <div class="card my-4 mx-auto">
       <div class="card-body m-2 m-md-4">
         <article class="row">
-          <div class="col-5"><img src=" {{ teacher.picture }}" class="img-fluid" alt=""></div>
-          <div class="col-7">
+          {% if teacher %}
+            <div class="col-5"><img src=" {{ teacher.picture }}" class="img-fluid" alt=""></div>
+            <div class="col-7">
 
-            <section class="teacher=info">
+              <section class="teacher=info">
 
-              <h1 class="h2">{{ teacher.name }}</h1>
-              <p><span class="badge badge-secondary mr-2"> {{ teacher.goal }} </span>Рейтинг: {{ teacher.rating }} Ставка: {{ teacher.price }} / час</p>
-              <p>{{ teacher.about }}</p>
+                <h1 class="h2">{{ teacher.name }}</h1>
+                <p><span class="badge badge-secondary mr-2"> {{ teacher.goal }} </span>Рейтинг: {{ teacher.rating }} Ставка: {{ teacher.price }} / час</p>
+                <p>{{ teacher.about }}</p>
 
-            </section>
+              </section>
 
-            <section class="available">
+              <section class="available">
 
-              <h4 class="mb-4 mt-5">Записаться на пробный урок</h4>
+                <h4 class="mb-4 mt-5">Записаться на пробный урок</h4>
+                <h6 class="mt-4">Понедельник</h6>
 
-              <h6 class="mt-4">Понедельник</h6>
-              {% if teacher.free.mon.values()|sum > 0 %}
-                {% for time, free in teacher.free.mon.items() %}
-                  {% if free %}
-                     <a href="/booking/{{ teacher.id }}/monday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
-                  {% endif %}
-                {% endfor %}
-              {% else %}
-                <p>Нет свободных уроков</p>
-              {% endif %}
+                {% if schedule['mon'].values()|sum > 0 %}
+                  {% for time, free in schedule['mon'].items() %}
+                    {% if free %}
+                       <a href="/booking/{{ teacher.id }}/monday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <p>Нет свободных уроков</p>
+                {% endif %}
+              </section>
 
-              <h6 class="mt-4">Вторник</h6>
-              {% if teacher.free.tue.values()|sum > 0 %}
-                {% for time, free in teacher.free.tue.items() %}
-                  {% if free %}
-                     <a href="/booking/{{ teacher.id }}/monday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
-                  {% endif %}
-                {% endfor %}
-              {% else %}
-                <p>Нет свободных уроков</p>
-              {% endif %}
-
-              <h6 class="mt-4">Среда</h6>
-              {% if teacher.free.wed.values()|sum > 0 %}
-                {% for time, free in teacher.free.wed.items() %}
-                  {% if free %}
-                     <a href="/booking/{{ teacher.id }}/wednesday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
-                  {% endif %}
-                {% endfor %}
-              {% else %}
-                <p>Нет свободных уроков</p>
-              {% endif %}
-
-              <h6 class="mt-4">Четверг</h6>
-              {% if teacher.free.thu.values()|sum > 0 %}
-                {% for time, free in teacher.free.thu.items() %}
-                  {% if free %}
-                     <a href="/booking/{{ teacher.id }}/thursday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
-                  {% endif %}
-                {% endfor %}
-              {% else %}
-                <p>Нет свободных уроков</p>
-              {% endif %}
-
-              <h6 class="mt-4">Пятница</h6>
-              {% if teacher.free.fri.values()|sum > 0 %}
-                {% for time, free in teacher.free.fri.items() %}
-                  {% if free %}
-                     <a href="/booking/{{ teacher.id }}/friday/{{ time[:2] }}" class="btn btn-outline-success mr-2">{{ time }} свободно</a>
-                  {% endif %}
-                {% endfor %}
-              {% else %}
-                <p>Нет свободных уроков</p>
-              {% endif %}
-
-            </section>
-
-          </div>
+            </div>
+          {% else %}
+            <p> 404. Этот преподаватель ещё не существует.<p>
+          {% endif %}
         </article>
       </div>
 
